@@ -4,11 +4,11 @@ from sklearn.datasets import load_iris
 import pylab as pl
 import pandas as pd
 
-input_file="/home/lia/Documents/FINAL-GEMASTIK/training.csv"
+input_file="datasets/iris.csv"
 df = pd.read_csv(input_file)
 
-X = df.ix[:,[0,1,2,3,4,5,6]]
-y = df.ix[:,7]
+X = df.ix[:,[0,1,2,3]]
+y = df.ix[:,4]
 
 pca = PCA(n_components=2).fit(df)
 

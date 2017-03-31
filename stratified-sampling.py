@@ -3,6 +3,7 @@
 
 import pandas as pd
 import numpy as np
+import scipy
 
 import time
 start_time = time.time()
@@ -28,7 +29,7 @@ classNames = [1,2,3,4,5]
 df_stratified = pd.DataFrame()
 
 for name in classNames:
-	temp = df.loc[df['class']==name].sample(frac=0.0005)
+	temp = df.loc[df['class']==name].sample(frac=0.0001)
 	df_stratified = pd.concat([df_stratified,temp])
 
 print("RESULT ARRAY")
@@ -45,6 +46,8 @@ print(df.describe())
 
 print("STATS OF THE STRATIFIED-SAMPLED DATASET")
 print(df_stratified.describe())
+
+scipy.stats.levene(df, df_stratified)
 
 time_elapsed = time.time() - start_time
 print("--- %s seconds ---" % (time_elapsed))
