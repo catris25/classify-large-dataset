@@ -1,4 +1,4 @@
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
 from matplotlib import style
 style.use('ggplot')
 import numpy as np
@@ -7,20 +7,21 @@ from sklearn.cluster import KMeans
 X = np.array([[1,2],
 			[1.5,1.8],
 			[5,8],
-			[8,8],
-			[1,0.6],
-			[9,11],
-			[2,8],
-			[3,1],
-			[7,5],
+			[8,7],
+			[2,11],
+			[6,2],
+			[1,8],
+			[7,3],
 			[9,6],
 			[1,5],
-			[6,7]])
+			[10,0],
+			[11,1],
+			[6,5]])
 
-# plt.scatter(X[:,0], X[:,1], s=150)
-# plt.show()
+plt.scatter(X[:,0], X[:,1], s=150)
+plt.show()
 
-clf = KMeans(n_clusters=4)
+clf = KMeans(n_clusters=5)
 clf.fit(X)
 
 centroids = clf.cluster_centers_

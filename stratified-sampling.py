@@ -1,9 +1,12 @@
 # Lia Ristiana
-# first step is to stratify the dataset into
+# first step is to stratify the dataset into smaller dataset
+# then we write it to csv file
+
+import csv
+import os
 
 import pandas as pd
 import numpy as np
-import scipy
 
 import time
 start_time = time.time()
@@ -17,11 +20,11 @@ df['class'] = df['class'].astype('category')
 
 pd.set_option('float_format', '{:f}'.format)
 
-print(df.head(10))
-# find out the class frequency
-classCount = df['class'].value_counts(sort=False)
-print("class frequency\n%s."%classCount)
-print("sum = %s"%classCount.sum())
+# print(df.head(10))
+# # find out the class frequency
+# classCount = df['class'].value_counts(sort=False)
+# print("class frequency\n%s."%classCount)
+# print("total data = %s"%classCount.sum())
 
 # DEFINE CLASS NAMES AS NEEDED
 classNames = [1,2,3,4,5]
@@ -38,16 +41,22 @@ print(df_stratified.head(5))
 # find out the stratified sampling data frequency
 classCount = df_stratified['class'].value_counts(sort=False)
 print("class frequency\n%s."%classCount)
-print("sum = %s"%classCount.sum())
+print("total data = %s"%classCount.sum())
 
 # LET'S COMPARE IT, BABY!
-print("STATS OF ORIGINAL DATASET")
-print(df.describe())
+# print("STATS OF ORIGINAL DATASET")
+# print(df.describe())
+#
+# print("STATS OF THE STRATIFIED-SAMPLED DATASET")
+# print(df_stratified.describe())
 
-print("STATS OF THE STRATIFIED-SAMPLED DATASET")
-print(df_stratified.describe())
+# WRITE STRATIFIED DATA TO A CSV FILE
 
-scipy.stats.levene(df, df_stratified)
+csv_name = time.strftime("%Y-%m-%d %H:%M:%S")
+os.makedirs("results/%s"%csv_name, exist_ok=True)
+df_stratified.to_csv(("results/%s/dataset.csv"%csv_name), sep=",", encoding="utf-8", index=False)
+df_stratified.describe().to_csv(("results/%s/stats.csv"%csv_name), sep=",", encoding="utf-8")
+classCount.to_csv(("results/%s/class-count.csv"%csv_name))
 
 time_elapsed = time.time() - start_time
 print("--- %s seconds ---" % (time_elapsed))
