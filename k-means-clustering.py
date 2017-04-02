@@ -12,7 +12,8 @@ from sklearn.cluster import KMeans
 import time
 start_time = time.time()
 
-input_file="results/sampled/2017-04-02 15:25:22/dataset.csv"
+dir_name = "2017-04-03 01:05:31"
+input_file="results/sampled/%s/dataset.csv"%dir_name
 
 df = pd.read_csv(input_file)
 
@@ -42,9 +43,21 @@ clusterNames = list(range(0,k))
 
 csv_name = time.strftime("%Y-%m-%d %H:%M:%S")
 os.makedirs("results/clustered/%s"%csv_name, exist_ok=True)
+
+count_temp = []
 for name in clusterNames:
     temp = x.loc[x['cluster']==name]
     temp.to_csv("results/clustered/%s/%s.csv"%(csv_name,name), index=False)
+    classCount = temp['class'].value_counts(sort=False)
+    print("class frequency\n%s."%classCount)
+    print("total data = %s"%classCount.sum())
+
+# classCount = x['class'].value_counts(sort=False)
+# print("class frequency\n%s."%classCount)
+# print("total data = %s"%classCount.sum())
+# classCount.to_csv(("results/clustered/%s/class-count.csv"%csv_name))
+
+print("The result files are in the %s"%csv_name)
 
 time_elapsed = time.time() - start_time
 print("--- %s seconds ---" % (time_elapsed))
