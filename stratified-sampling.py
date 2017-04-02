@@ -53,10 +53,11 @@ print("total data = %s"%classCount.sum())
 # WRITE STRATIFIED DATA TO A CSV FILE
 
 csv_name = time.strftime("%Y-%m-%d %H:%M:%S")
-os.makedirs("results/%s"%csv_name, exist_ok=True)
-df_stratified.to_csv(("results/%s/dataset.csv"%csv_name), sep=",", encoding="utf-8", index=False)
-df_stratified.describe().to_csv(("results/%s/stats.csv"%csv_name), sep=",", encoding="utf-8")
-classCount.to_csv(("results/%s/class-count.csv"%csv_name))
+local_dir = "results/stratified/"
+os.makedirs("results/stratified/%s"%csv_name, exist_ok=True)
+df_stratified.to_csv(("results/stratified/%s/dataset.csv"%csv_name), sep=",", encoding="utf-8", index=False)
+df_stratified.describe().to_csv(("results/stratified/%s/stats.csv"%csv_name), sep=",", encoding="utf-8")
+classCount.to_csv(("results/stratified/%s/class-count.csv"%csv_name))
 
 time_elapsed = time.time() - start_time
 print("--- %s seconds ---" % (time_elapsed))
