@@ -46,7 +46,5 @@ for name in clusterNames:
     temp = x.loc[x['cluster']==name]
     temp.to_csv("results/clustered/%s/%s.csv"%(csv_name,name), index=False)
 
-
-
 time_elapsed = time.time() - start_time
 print("--- %s seconds ---" % (time_elapsed))
