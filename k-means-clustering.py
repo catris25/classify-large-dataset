@@ -44,6 +44,11 @@ clusterNames = list(range(0,k))
 csv_name = time.strftime("%Y-%m-%d %H:%M:%S")
 os.makedirs("results/clustered/%s"%csv_name, exist_ok=True)
 
+# store the centroids
+print("centroid")
+df_centroids = pd.DataFrame(centroids,columns=['attr1', 'attr2', 'attr3', 'attr4', 'attr5', 'attr6', 'attr7'])
+df_centroids.to_csv("results/clustered/%s/centroids.csv"%csv_name, index=False)
+
 count_temp = []
 for name in clusterNames:
     temp = x.loc[x['cluster']==name]
