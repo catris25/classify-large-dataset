@@ -32,7 +32,7 @@ classNames = [1,2,3,4,5]
 df_stratified = pd.DataFrame()
 
 for name in classNames:
-	temp = df.loc[df['class']==name].sample(frac=0.05)
+	temp = df.loc[df['class']==name].sample(frac=0.01)
 	df_stratified = pd.concat([df_stratified,temp])
 
 print("RESULT ARRAY")

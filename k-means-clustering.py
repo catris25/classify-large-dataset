@@ -12,7 +12,7 @@ from sklearn.cluster import KMeans
 import time
 start_time = time.time()
 
-dir_name = "2017-04-03 01:05:31"
+dir_name = "2017-04-03 09:52:06"
 input_file="results/sampled/%s/dataset.csv"%dir_name
 
 df = pd.read_csv(input_file)
