@@ -1,5 +1,7 @@
 # Lia Ristiana
 # Naive Bayes classification implementation using sklearn
+# training set is obtained from the clustered data
+# testing set is obtained from the sampled data
 
 import numpy as np
 import pandas as pd
