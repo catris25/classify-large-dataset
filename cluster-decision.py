@@ -27,6 +27,8 @@ df_centroids= pd.read_csv(input_file)
 
 centroids = df_centroids.as_matrix()
 
+# Decide which cluster a data point is closest to
+# by using euclidean distance
 closest_cluster = []
 for index_t, row_t in df_testing.ix[:,[0,1,2,3,4,5,6]].iterrows():
     dist = []
@@ -40,6 +42,8 @@ for index_t, row_t in df_testing.ix[:,[0,1,2,3,4,5,6]].iterrows():
 
 df_testing['closest_cluster'] = closest_cluster
 
+# Save all data to its own file based on the closest cluster
+# to be used later as a testig set
 count_temp = []
 for i in range(len(centroids)):
     temp = df_testing.loc[df_testing['closest_cluster']==i]
