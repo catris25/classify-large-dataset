@@ -43,6 +43,9 @@ df_testing['closest_cluster'] = closest_cluster
 count_temp = []
 for i in range(len(centroids)):
     temp = df_testing.loc[df_testing['closest_cluster']==i]
-    # temp.to_csv("results/try-%s.csv"%i, index=False)
+    temp.to_csv("results/try-%s.csv"%i, index=False)
     classCount = temp['class'].value_counts(sort=False)
     print(classCount)
+
+time_elapsed = time.time() - start_time
+print("--- %s seconds ---" % (time_elapsed))
