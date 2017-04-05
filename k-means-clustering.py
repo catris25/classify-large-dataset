@@ -12,7 +12,7 @@ from sklearn.cluster import KMeans
 import time
 start_time = time.time()
 
-dir_name = "2017-04-03 09:52:06"
+dir_name = "2017-04-05 23:42:22"
 input_file="results/sampled/%s/dataset.csv"%dir_name
 
 df = pd.read_csv(input_file)
@@ -20,7 +20,7 @@ df = pd.read_csv(input_file)
 x = df.ix[:,[0,1,2,3,4,5,6]]
 y = df.ix[:,7]
 
-k=3
+k=4
 
 model = KMeans(n_clusters=k)
 model.fit(x)
