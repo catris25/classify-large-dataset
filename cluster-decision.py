@@ -27,26 +27,22 @@ df_centroids= pd.read_csv(input_file)
 
 centroids = df_centroids.as_matrix()
 
-# for i in range(len(df_testing)):
-#     for j in range(len(df_centroids)):
-
-
-distance_matrix = []
+closest_cluster = []
 for index_t, row_t in df_testing.ix[:,[0,1,2,3,4,5,6]].iterrows():
     dist = []
-    # for index_c, row_c in df_centroids.iterrows():
-    dst = 1
-    smaller=0
     for i in range(len(centroids)):
-        temp = dst
         dst = distance.euclidean(centroids[i], row_t)
-        smaller = min(dst,temp)
-        
-        # print(dst)
-    print(index_t,smaller,ind)
-    # distance_matrix[index_t] = smaller
-    # distance_matrix = distance_matrix.append(distance_matrix)
+        dist.append(dst)
 
+    smallest = min(np.hstack(dist))
+    cluster = dist.index(smallest)
+    closest_cluster.append(cluster)
 
-# print(distance_matrix)
-# dst = distance.euclidean(df_testing)
+df_testing['closest_cluster'] = closest_cluster
+
+count_temp = []
+for i in range(len(centroids)):
+    temp = df_testing.loc[df_testing['closest_cluster']==i]
+    # temp.to_csv("results/try-%s.csv"%i, index=False)
+    classCount = temp['class'].value_counts(sort=False)
+    print(classCount)
