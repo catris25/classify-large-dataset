@@ -20,7 +20,7 @@ df = pd.read_csv(input_file)
 x = df.ix[:,[0,1,2,3,4,5,6]]
 y = df.ix[:,7]
 
-k=4
+k=5
 
 model = KMeans(n_clusters=k)
 model.fit(x)
@@ -45,18 +45,17 @@ csv_name = time.strftime("%Y-%m-%d %H:%M:%S")
 os.makedirs("results/clustered/%s"%csv_name, exist_ok=True)
 
 # store the centroids
-print("centroid")
 df_centroids = pd.DataFrame(centroids,columns=['attr1', 'attr2', 'attr3', 'attr4', 'attr5', 'attr6', 'attr7'])
 df_centroids.to_csv("results/clustered/%s/centroids.csv"%csv_name, index=False)
 
-count_temp = []
 for name in clusterNames:
     temp = x.loc[x['cluster']==name]
     temp.to_csv("results/clustered/%s/%s.csv"%(csv_name,name), index=False)
     classCount = temp['class'].value_counts(sort=False)
-    print("class frequency\n%s."%classCount)
-    print("total data = %s"%classCount.sum())
+    df_class = classCount.to_frame()
+    df_class.to_csv("results/clustered/%s/class-count-%s.csv"%(csv_name,name))
 
+# print(count_temp)
 # classCount = x['class'].value_counts(sort=False)
 # print("class frequency\n%s."%classCount)
 # print("total data = %s"%classCount.sum())
