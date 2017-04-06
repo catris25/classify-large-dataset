@@ -20,7 +20,7 @@ df = pd.read_csv(input_file)
 x = df.ix[:,[0,1,2,3,4,5,6]]
 y = df.ix[:,7]
 
-k=5
+k=4
 
 model = KMeans(n_clusters=k)
 model.fit(x)

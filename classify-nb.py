@@ -13,13 +13,13 @@ from sklearn.metrics import accuracy_score
 import time
 start_time = time.time()
 
-dir_name = "2017-04-06 11:11:08"
-file_name = "4"
+dir_name = "2017-04-06 13:06:51"
+file_name = "3"
 input_file="results/clustered/%s/%s.csv"%(dir_name,file_name)
 df_training = pd.read_csv(input_file)
 
-dir_name = "2017-04-06 11:14:01"
-file_name = "4"
+dir_name = "2017-04-06 13:07:43"
+file_name = "3"
 input_file="results/testing-set/%s/%s.csv"%(dir_name,file_name)
 df_testing = pd.read_csv(input_file)
 
