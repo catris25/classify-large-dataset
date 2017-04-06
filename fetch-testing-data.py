@@ -22,7 +22,7 @@ input_file="/home/lia/Documents/FINAL-GEMASTIK/training.csv"
 df = pd.read_csv(input_file)
 
 # FETCH THE CENTROIDS
-dir_name = "2017-04-05 23:43:57"
+dir_name = "2017-04-05 23:37:37"
 input_file="results/clustered/%s/centroids.csv"%dir_name
 df_centroids= pd.read_csv(input_file)
 
@@ -39,7 +39,7 @@ classNames = [1,2,3,4,5]
 df_stratified = pd.DataFrame()
 
 for name in classNames:
-	temp = df.loc[df['class']==name].sample(n=2000)
+	temp = df.loc[df['class']==name].sample(n=500)
 	df_stratified = pd.concat([df_stratified,temp])
 
 print("RESULT ARRAY")
