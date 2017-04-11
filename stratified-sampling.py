@@ -31,8 +31,9 @@ classNames = [1,2,3,4,5]
 
 df_stratified = pd.DataFrame()
 
+fraction = 0.01
 for name in classNames:
-	temp = df.loc[df['class']==name].sample(frac=0.01)
+	temp = df.loc[df['class']==name].sample(frac=fraction)
 	df_stratified = pd.concat([df_stratified,temp])
 
 print("RESULT ARRAY")
@@ -52,13 +53,15 @@ print("total data = %s"%classCount.sum())
 
 # WRITE STRATIFIED DATA TO A CSV FILE
 
-csv_name = time.strftime("%Y-%m-%d %H:%M:%S")
+# csv_name = time.strftime("%Y-%m-%d %H:%M:%S")
+
+dir_name = fraction
 local_dir = "results/sampled/"
-os.makedirs("results/sampled/%s"%csv_name, exist_ok=True)
-df_stratified.to_csv(("results/sampled/%s/dataset.csv"%csv_name), sep=",", encoding="utf-8", index=False)
-df_stratified.describe().to_csv(("results/sampled/%s/stats.csv"%csv_name), sep=",", encoding="utf-8")
-classCount.to_csv(("results/sampled/%s/class-count.csv"%csv_name))
-print("The result files are in the %s"%csv_name)
+os.makedirs("results/sampled/%s"%(fraction), exist_ok=True)
+df_stratified.to_csv(("results/sampled/%s/dataset.csv"%dir_name), sep=",", encoding="utf-8", index=False)
+df_stratified.describe().to_csv(("results/sampled/%s/stats.csv"%dir_name), sep=",", encoding="utf-8")
+classCount.to_csv(("results/sampled/%s/class-count.csv"%dir_name))
+print("The result files are in the %s"%dir_name)
 
 time_elapsed = time.time() - start_time
 print("--- %s seconds ---" % (time_elapsed))

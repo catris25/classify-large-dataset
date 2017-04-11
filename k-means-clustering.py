@@ -12,7 +12,7 @@ from sklearn.cluster import KMeans
 import time
 start_time = time.time()
 
-dir_name = "2017-04-05 23:42:22"
+dir_name = "0.01"
 input_file="results/sampled/%s/dataset.csv"%dir_name
 
 df = pd.read_csv(input_file)
@@ -20,7 +20,7 @@ df = pd.read_csv(input_file)
 x = df.ix[:,[0,1,2,3,4,5,6]]
 y = df.ix[:,7]
 
-k=4
+k=5
 
 model = KMeans(n_clusters=k)
 model.fit(x)
@@ -34,34 +34,30 @@ x["class"] = y
 x["cluster"] = label_col.values
 
 # SAVE THE WHOLE DATA TO CSV
-# csv_name = time.strftime("%Y-%m-%d %H:%M:%S")
-# os.makedirs("results/clustered/%s"%csv_name, exist_ok=True)
-# x.to_csv(("results/clustered/%s/clustered-dataset.csv"%csv_name), sep=",", encoding="utf-8", index=False)
+# dir_name = "k%s"%k
+# os.makedirs("results/clustered/%s"%dir_name, exist_ok=True)
+# x.to_csv(("results/clustered/%s/clustered-dataset.csv"%dir_name), sep=",", encoding="utf-8", index=False)
 
 # SAVE THE DATA TO ITS OWN CSV BASED ON ITS CLUSTER
 clusterNames = list(range(0,k))
 
-csv_name = time.strftime("%Y-%m-%d %H:%M:%S")
-os.makedirs("results/clustered/%s"%csv_name, exist_ok=True)
+# dir_name = "%sclusters"%k
+# os.makedirs("results/clustered/%s"%dir_name, exist_ok=True)
 
 # store the centroids
-df_centroids = pd.DataFrame(centroids,columns=['attr1', 'attr2', 'attr3', 'attr4', 'attr5', 'attr6', 'attr7'])
-df_centroids.to_csv("results/clustered/%s/centroids.csv"%csv_name, index=False)
+# df_centroids = pd.DataFrame(centroids,columns=['attr1', 'attr2', 'attr3', 'attr4', 'attr5', 'attr6', 'attr7'])
+# df_centroids.to_csv("results/clustered/%s/centroids.csv"%dir_name, index=False)
 
 for name in clusterNames:
     temp = x.loc[x['cluster']==name]
-    temp.to_csv("results/clustered/%s/%s.csv"%(csv_name,name), index=False)
+    # temp.to_csv("results/clustered/%s/%s.csv"%(dir_name,name), index=False)
     classCount = temp['class'].value_counts(sort=False)
-    df_class = classCount.to_frame()
-    df_class.to_csv("results/clustered/%s/class-count-%s.csv"%(csv_name,name))
+    print(classCount)
+    # df_class = classCount.to_frame()
+    # df_class.to_csv("results/clustered/%s/class-count-%s.csv"%(dir_name,name), sort=False)
 
-# print(count_temp)
-# classCount = x['class'].value_counts(sort=False)
-# print("class frequency\n%s."%classCount)
-# print("total data = %s"%classCount.sum())
-# classCount.to_csv(("results/clustered/%s/class-count.csv"%csv_name))
 
-print("The result files are in the %s"%csv_name)
+# print("The result files are in the %s"%dir_name)
 
 time_elapsed = time.time() - start_time
 print("--- %s seconds ---" % (time_elapsed))
