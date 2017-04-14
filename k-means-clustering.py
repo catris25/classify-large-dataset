@@ -12,7 +12,7 @@ from sklearn.cluster import KMeans
 import time
 start_time = time.time()
 
-dir_name = "0.01"
+dir_name = "2017-04-13 12:33:41"
 input_file="results/sampled/%s/dataset.csv"%dir_name
 
 df = pd.read_csv(input_file)
@@ -20,7 +20,7 @@ df = pd.read_csv(input_file)
 x = df.ix[:,[0,1,2,3,4,5,6]]
 y = df.ix[:,7]
 
-k=5
+k=10
 
 model = KMeans(n_clusters=k)
 model.fit(x)
@@ -41,23 +41,23 @@ x["cluster"] = label_col.values
 # SAVE THE DATA TO ITS OWN CSV BASED ON ITS CLUSTER
 clusterNames = list(range(0,k))
 
-# dir_name = "%sclusters"%k
-# os.makedirs("results/clustered/%s"%dir_name, exist_ok=True)
+dir_name = "%sclusters"%k
+os.makedirs("results/clustered/%s"%dir_name, exist_ok=True)
 
 # store the centroids
-# df_centroids = pd.DataFrame(centroids,columns=['attr1', 'attr2', 'attr3', 'attr4', 'attr5', 'attr6', 'attr7'])
-# df_centroids.to_csv("results/clustered/%s/centroids.csv"%dir_name, index=False)
+df_centroids = pd.DataFrame(centroids,columns=['attr1', 'attr2', 'attr3', 'attr4', 'attr5', 'attr6', 'attr7'])
+df_centroids.to_csv("results/clustered/%s/centroids.csv"%dir_name, index=False)
 
 for name in clusterNames:
     temp = x.loc[x['cluster']==name]
-    # temp.to_csv("results/clustered/%s/%s.csv"%(dir_name,name), index=False)
+    temp.to_csv("results/clustered/%s/%s.csv"%(dir_name,name), index=False)
     classCount = temp['class'].value_counts(sort=False)
     print(classCount)
     # df_class = classCount.to_frame()
     # df_class.to_csv("results/clustered/%s/class-count-%s.csv"%(dir_name,name), sort=False)
 
 
-# print("The result files are in the %s"%dir_name)
+print("The result files are in the %s"%(dir_name))
 
 time_elapsed = time.time() - start_time
 print("--- %s seconds ---" % (time_elapsed))
