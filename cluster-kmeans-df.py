@@ -51,10 +51,12 @@ class K_Means:
             for row in data.itertuples(index=False):
                 distances = np.linalg.norm(self.centroids - row, axis=1)
                 cluster_label = distances.argmin()
-                print(cluster_label)
+                print(distances)
                 # self.clustering[cluster_label].append(row)
                 # self.clustering.loc[cluster_label].append(row)
-                # self.clustering.loc[cluster_label]+=row
+
+                self.clustering.loc[cluster_label]
+
 
                 # sum_distances += min(distances)
 
