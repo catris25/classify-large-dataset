@@ -13,34 +13,60 @@ from sklearn.metrics import accuracy_score
 import time
 start_time = time.time()
 
-dir_name = "10clusters"
-file_name = "9"
-input_file="results/clustered/%s/%s.csv"%(dir_name,file_name)
-df_training = pd.read_csv(input_file)
+training_dir_name = "10clusters"
+testing_dir_name = "2017-04-28 09:43:10"
 
-dir_name = "2017-04-28 09:43:10"
-input_file="results/testing-set/%s/%s.csv"%(dir_name,file_name)
-df_testing = pd.read_csv(input_file)
+k= 10
 
-training_attr = df_training.ix[:,[0,1,2,3,4,5,6]]
-training_target = df_training.ix[:,7]
+def classify_nb(df_training, df_testing):
+    training_attr = df_training.ix[:,[0,1,2,3,4,5,6]]
+    training_target = df_training.ix[:,7]
 
-testing_attr = df_testing.ix[:,[0,1,2,3,4,5,6]]
-testing_target = df_testing.ix[:,7]
+    testing_attr = df_testing.ix[:,[0,1,2,3,4,5,6]]
+    testing_target = df_testing.ix[:,7]
 
-model = GaussianNB()
-model.fit(training_attr, training_target)
+    model = GaussianNB()
+    model.fit(training_attr, training_target)
 
-prediction = model.predict(testing_attr)
+    prediction = model.predict(testing_attr)
 
-print("Cluster %s"%file_name)
+    print("Cluster %s"%file_name)
 
-print("confusion matrix")
-print(metrics.confusion_matrix(testing_target, prediction))
+    print("confusion matrix")
+    cm = metrics.confusion_matrix(testing_target, prediction)
+    print(cm)
 
-accu = accuracy_score(prediction, testing_target)
-print("accuracy")
-print(accu)
+    accu = accuracy_score(prediction, testing_target)
+    print("accuracy")
+    print(accu)
+
+    # get true positive
+    true_pos = np.diag(cm).sum()
+    sum_matrix = cm.sum()
+
+    print("TP/all: %s/%s"%(true_pos,sum_matrix))
+
+    return accu, true_pos, sum_matrix
+
+total_accuracy = 0
+all_true_pos = 0
+all_sum_matrix = 0
+for i in range(k):
+    file_name = i
+    input_file="results/clustered/%s/%s.csv"%(training_dir_name,file_name)
+    df_training = pd.read_csv(input_file)
+
+    input_file="results/testing-set/%s/%s.csv"%(testing_dir_name,file_name)
+    df_testing = pd.read_csv(input_file)
+
+    accu, true_pos, sum_matrix = classify_nb(df_training, df_testing)
+    all_true_pos += true_pos
+    all_sum_matrix += sum_matrix
+
+    print("------------------------")
+
+print("TP:",all_true_pos," all:",all_sum_matrix)
+print("P :",all_true_pos/all_sum_matrix)
 
 time_elapsed = time.time() - start_time
 print("--- %s seconds ---" % (time_elapsed))
