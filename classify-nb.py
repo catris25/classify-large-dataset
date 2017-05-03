@@ -13,10 +13,10 @@ from sklearn.metrics import accuracy_score
 import time
 start_time = time.time()
 
-training_dir_name = "10clusters"
-testing_dir_name = "2017-04-28 09:43:10"
+training_dir_name = "5clusters"
+testing_dir_name = "2017-05-03 17:21:16"
 
-k= 10
+k= 5
 
 def classify_nb(df_training, df_testing):
     training_attr = df_training.ix[:,[0,1,2,3,4,5,6]]

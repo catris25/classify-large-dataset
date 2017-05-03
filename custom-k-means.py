@@ -22,7 +22,7 @@ df = pd.read_csv(input_file)
 x = df.ix[:,[0,1,2,3,4,5,6]].values
 y = df.ix[:,7].values
 
-k = 10
+k = 5
 
 # x_array = np.array([[10.979,7.748],
 #             [9.352,8.743],

@@ -17,12 +17,14 @@ from scipy.spatial import distance
 import time
 start_time = time.time()
 
+n_size = 1000
+
 # FETCH THE TESTING SET
 input_file="/home/lia/Documents/FINAL-GEMASTIK/training.csv"
 df = pd.read_csv(input_file)
 
 # FETCH THE CENTROIDS
-dir_name = "10clusters"
+dir_name = "5clusters"
 input_file="results/clustered/%s/centroids.csv"%dir_name
 df_centroids= pd.read_csv(input_file)
 
@@ -39,7 +41,7 @@ classNames = [1,2,3,4,5]
 df_stratified = pd.DataFrame()
 
 for name in classNames:
-	temp = df.loc[df['class']==name].sample(n=3000)
+	temp = df.loc[df['class']==name].sample(n=n_size)
 	df_stratified = pd.concat([df_stratified,temp])
 
 print("RESULT ARRAY")
