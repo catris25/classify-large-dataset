@@ -22,7 +22,7 @@ df = pd.read_csv(input_file)
 x = df.ix[:,[0,1,2,3,4,5,6]].values
 y = df.ix[:,7].values
 
-k = 2
+k = 10
 
 # x_array = np.array([[10.979,7.748],
 #             [9.352,8.743],
@@ -96,12 +96,11 @@ os.makedirs("results/clustered/%s"%dir_name, exist_ok=True)
 # store the centroids
 
 centroids = pd.DataFrame(clr.centroids)
-print("c:",centroids)
 
 centroids = np.transpose(centroids)
 df_centroids = pd.DataFrame(centroids)
 cols=['attr1', 'attr2', 'attr3', 'attr4', 'attr5', 'attr6', 'attr7']
-print("df:",df_centroids)
+print(df_centroids)
 df_centroids.to_csv("results/clustered/%s/centroids.csv"%dir_name, index=False)
 print("SSE: ",clr.sse)
 
@@ -114,9 +113,9 @@ for name in clusterNames:
     temp.to_csv("results/clustered/%s/%s.csv"%(dir_name,name), index=False)
     classCount = temp['class'].value_counts(sort=False)
     print(classCount)
+    print("total data = %s"%classCount.sum())
 
 print("The result files are in the %s"%(dir_name))
-
 
 time_elapsed = time.time() - start_time
 print("--- %s seconds ---" % (time_elapsed))

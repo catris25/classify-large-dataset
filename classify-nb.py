@@ -18,7 +18,7 @@ file_name = "9"
 input_file="results/clustered/%s/%s.csv"%(dir_name,file_name)
 df_training = pd.read_csv(input_file)
 
-dir_name = "2017-04-14 14:34:33"
+dir_name = "2017-04-28 09:43:10"
 input_file="results/testing-set/%s/%s.csv"%(dir_name,file_name)
 df_testing = pd.read_csv(input_file)
 
