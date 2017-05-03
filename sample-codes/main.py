@@ -1,1 +1,1 @@
-import test-it
+import test_it
