@@ -14,7 +14,7 @@ import pandas as pd
 import time
 start_time = time.time()
 
-dir_name = "2017-04-13 12:33:41"
+dir_name = "2017-05-03 22:46:52"
 input_file="results/sampled/%s/dataset.csv"%dir_name
 
 df = pd.read_csv(input_file)
@@ -22,7 +22,7 @@ df = pd.read_csv(input_file)
 x = df.ix[:,[0,1,2,3,4,5,6]].values
 y = df.ix[:,7].values
 
-k = 5
+k = 15
 
 # x_array = np.array([[10.979,7.748],
 #             [9.352,8.743],
