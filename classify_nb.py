@@ -3,6 +3,8 @@
 # training set is obtained from the clustered data
 # testing set is obtained from the sampled data
 
+import __main__
+
 import numpy as np
 import pandas as pd
 
@@ -13,10 +15,10 @@ from sklearn.metrics import accuracy_score
 import time
 start_time = time.time()
 
-training_dir_name = "15clusters"
-testing_dir_name = "2017-05-03 23:54:53"
+training_dir_name = __main__.main_training_dir
+testing_dir_name = __main__.main_testing_dir
 
-k= 15
+k= __main__.main_k
 
 def classify_nb(df_training, df_testing):
     training_attr = df_training.ix[:,[0,1,2,3,4,5,6]]
@@ -53,10 +55,10 @@ all_true_pos = 0
 all_sum_matrix = 0
 for i in range(k):
     file_name = i
-    input_file="results/clustered/%s/%s.csv"%(training_dir_name,file_name)
+    input_file="%s/%s.csv"%(training_dir_name,file_name)
     df_training = pd.read_csv(input_file)
 
-    input_file="results/testing-set/%s/%s.csv"%(testing_dir_name,file_name)
+    input_file="%s/%s.csv"%(testing_dir_name,file_name)
     df_testing = pd.read_csv(input_file)
 
     accu, true_pos, sum_matrix = classify_nb(df_training, df_testing)

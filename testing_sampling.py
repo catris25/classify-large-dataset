@@ -3,6 +3,8 @@
 # with fixed number of data from each class
 # then we write it to csv file
 
+import __main__
+
 import csv
 import os
 
@@ -16,6 +18,8 @@ start_time = time.time()
 input_file="/home/lia/Documents/FINAL-GEMASTIK/training.csv"
 df = pd.read_csv(input_file)
 
+n_size = __main__.main_n_testing_size
+
 df['class'] = df['class'].astype('category')
 
 pd.set_option('float_format', '{:f}'.format)
@@ -26,7 +30,7 @@ classNames = [1,2,3,4,5]
 df_stratified = pd.DataFrame()
 
 for name in classNames:
-	temp = df.loc[df['class']==name].sample(n=100)
+	temp = df.loc[df['class']==name].sample(n=n_size)
 	df_stratified = pd.concat([df_stratified,temp])
 
 print("RESULT ARRAY")
@@ -42,3 +46,5 @@ df_stratified.to_csv(("%s%s/testing-set.csv"%(local_dir,csv_name)), sep=",", enc
 df_stratified.describe().to_csv(("%s%s/stats.csv"%(local_dir,csv_name)), sep=",", encoding="utf-8")
 
 print("The result files are in the %s"%csv_name)
+
+testing_set_dir = local_dir+csv_name+"/testing-set.csv"

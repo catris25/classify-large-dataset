@@ -3,6 +3,8 @@
 # second step is to cluster the stratified dataset
 # then we write it to csv file
 
+import __main__
+
 import os
 
 import matplotlib.pyplot as plt
@@ -14,7 +16,7 @@ import pandas as pd
 import time
 start_time = time.time()
 
-dir_name = "2017-05-03 22:46:52"
+dir_name = __main__.main_sampled_dir_name
 input_file="results/sampled/%s/dataset.csv"%dir_name
 
 df = pd.read_csv(input_file)
@@ -22,7 +24,7 @@ df = pd.read_csv(input_file)
 x = df.ix[:,[0,1,2,3,4,5,6]].values
 y = df.ix[:,7].values
 
-k = 15
+k = __main__.main_k
 
 # x_array = np.array([[10.979,7.748],
 #             [9.352,8.743],
@@ -116,6 +118,7 @@ for name in clusterNames:
     print("total data = %s"%classCount.sum())
 
 print("The result files are in the %s"%(dir_name))
+clustered_set_dir = "results/clustered/"+dir_name
 
 time_elapsed = time.time() - start_time
 print("--- %s seconds ---" % (time_elapsed))
