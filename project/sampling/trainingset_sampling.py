@@ -26,9 +26,6 @@ def sampling(input_file):
     	temp = df.loc[df['class']==name].sample(frac=fraction)
     	df_stratified = pd.concat([df_stratified,temp])
 
-    print("RESULT ARRAY")
-    print(df_stratified.head(5))
-
     # find out the stratified sampling data frequency
     classCount = df_stratified['class'].value_counts(sort=False)
     print("class frequency\n%s."%classCount)
