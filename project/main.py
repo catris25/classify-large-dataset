@@ -1,11 +1,43 @@
 import time
 start_time = time.time()
 
+# SAMPLING TRAINING SET
+print("# SAMPLING TRAINING SET")
 input_file="/home/lia/Documents/FINAL-GEMASTIK/training.csv"
-import sampling.trainingset_sampling as train
-sampled_training_dir = train.sampling(input_file)
+import sampling_trainingset as train
+training_sampled_dir = train.sampling(input_file)
+print("training sampled:", training_sampled_dir)
 
+# CLUSTERING TRAINING SET
+print("# CLUSTERING TRAINING SET")
+import clustering_k_means as clsr
+input_file = training_sampled_dir
+k_size = 2
+training_clustered_dir = clsr.kmeans(input_file, k_size)
+print("training clustered:",training_clustered_dir)
 
+# SAMPLING TESTING SET
+print("# SAMPLING TESTING SET")
+input_file="/home/lia/Documents/FINAL-GEMASTIK/training.csv"
+import sampling_testingset as test
+n_size = 1000
+testing_sampled_dir = test.sampling(input_file, n_size)
+print("testing sampled:", testing_sampled_dir)
+
+# CLUSTERING TESTING SET
+print("# CLUSTERING TESTING SET")
+testing_file = testing_sampled_dir
+training_clustered_file = training_clustered_dir
+import clustering_testingset as clsrtest
+testing_clustered_dir = clsrtest.cluster_test(training_clustered_file, testing_file)
+print("testing clustered:", testing_clustered_dir)
+
+# CLASSIFICATION NAIVE BAYES
+print("# CLASSIFICATION NAIVE BAYES")
+import classify_nb as nb
+training_dir = training_clustered_dir
+testing_dir = testing_clustered_dir
+nb.classify_all(training_dir,testing_dir, k_size)
 
 time_elapsed = time.time() - start_time
 print("--- %s seconds ---" % (time_elapsed))

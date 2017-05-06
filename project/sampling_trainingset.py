@@ -37,11 +37,11 @@ def sampling(input_file):
     local_dir = "output/training_sampled"
 
     os.makedirs("%s/%s"%(local_dir, dir_name), exist_ok=True)
-    df_stratified.to_csv(("%s/%s/dataset.csv"%(local_dir, dir_name)), sep=",", encoding="utf-8", index=False)
+    df_stratified.to_csv(("%s/%s/training_set.csv"%(local_dir, dir_name)), sep=",", encoding="utf-8", index=False)
     df_stratified.describe().to_csv(("%s/%s/stats.csv"%(local_dir,dir_name)), sep=",", encoding="utf-8")
     classCount.to_csv(("%s/%s/class-count.csv"%(local_dir,dir_name)))
 
-    training_sampled_dir = "%s/%s"%(local_dir,dir_name)
+    training_sampled_dir = "%s/%s/training_set.csv"%(local_dir,dir_name)
 
     return training_sampled_dir
 

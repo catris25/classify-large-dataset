@@ -11,8 +11,8 @@ import pandas as pd
 import time
 
 class K_Means:
-    def __init__(self, k=k, tol=0.001, max_iter=300):
-        self.k = k
+    def __init__(self, k_size, tol=0.001, max_iter=300):
+        self.k = k_size
         self.tol = tol
         self.max_iter = max_iter
 
@@ -67,14 +67,14 @@ def kmeans(input_file, k_size):
     x = df.ix[:,[0,1,2,3,4,5,6]].values
     y = df.ix[:,7].values
 
-    clr = K_Means()
+    clr = K_Means(k_size)
     clr.fit(x)
 
     # SAVE THE DATA TO ITS OWN CSV BASED ON ITS CLUSTER
     clusterNames = list(range(0,k))
 
     dir_name = "%sclusters"%k
-    os.makedirs("results/clustered/%s"%dir_name, exist_ok=True)
+    os.makedirs("output/training_clustered/%s"%dir_name, exist_ok=True)
 
     # store the centroids
     centroids = pd.DataFrame(clr.centroids)
@@ -83,7 +83,7 @@ def kmeans(input_file, k_size):
     df_centroids = pd.DataFrame(centroids)
     cols=['attr1', 'attr2', 'attr3', 'attr4', 'attr5', 'attr6', 'attr7']
     print(df_centroids)
-    df_centroids.to_csv("results/clustered/%s/centroids.csv"%dir_name, index=False)
+    df_centroids.to_csv("output/training_clustered/%s/centroids.csv"%dir_name, index=False)
     print("SSE: ",clr.sse)
 
     labels = clr.labels
@@ -92,14 +92,14 @@ def kmeans(input_file, k_size):
     for name in clusterNames:
         print("name:", name)
         temp = df.loc[df['cluster']==name]
-        temp.to_csv("results/clustered/%s/%s.csv"%(dir_name,name), index=False)
+        temp.to_csv("output/training_clustered/%s/%s.csv"%(dir_name,name), index=False)
         classCount = temp['class'].value_counts(sort=False)
         print(classCount)
         print("total data = %s"%classCount.sum())
 
     print("The result files are in the %s"%(dir_name))
-    clustered_set_dir = "results/clustered/"+dir_name
-    return clustered_set_dir
+    training_clustered_dir = "output/training_clustered/"+dir_name
+    return training_clustered_dir
 
 def main():
     k_size = 3
