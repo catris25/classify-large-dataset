@@ -13,7 +13,7 @@ print("# CLUSTERING TRAINING SET")
 import clustering_k_means as clsr
 # input_file = training_sampled_dir
 input_file = "output/training_sampled/2017-05-07 23:12:26/training_set.csv"
-k_size = 10
+k_size = 16
 training_clustered_dir = clsr.kmeans(input_file, k_size)
 print("training clustered:",training_clustered_dir)
 
