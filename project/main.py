@@ -39,5 +39,9 @@ training_dir = training_clustered_dir
 testing_dir = testing_clustered_dir
 nb.classify_all(training_dir,testing_dir, k_size)
 
+# CLASSIFICATION K NEAREST NEIGHBOR
+print("# CLASSIFICATION K NEAREST NEIGHBOR")
+
+
 time_elapsed = time.time() - start_time
 print("--- %s seconds ---" % (time_elapsed))
