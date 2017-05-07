@@ -69,12 +69,18 @@ def classify_all(training_dir, testing_dir, k_size):
     print("TP:",all_true_pos," all:",all_sum_matrix)
     print("P :",all_true_pos/all_sum_matrix)
 
-def main():
-    training_dir = "output/training_clustered/3clusters/"
-    testing_dir = "output/testing_clustered/3clusters/"
-    k_size = 3
+    return all_true_pos, all_sum_matrix
 
-    clsr = classify_all(training_dir,testing_dir, k_size)
+def main():
+    training_dir = "output/training_sampled/2017-05-07 23:12:26/training_set.csv"
+    testing_dir = "output/testing_sampled/2017-05-07 23:12:32/testing-set.csv"
+    k_size = 1
+
+    # clsr = classify_all(training_dir,testing_dir, k_size)
+
+    df_training = pd.read_csv(training_dir)
+    df_testing = pd.read_csv(testing_dir)
+    print(classify(df_training, df_testing))
 
 if __name__ == "__main__":
     main()
