@@ -1,3 +1,5 @@
 env/*
 datasets/*
 results/*
+project/output/*
+
