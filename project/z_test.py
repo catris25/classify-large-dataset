@@ -4,6 +4,8 @@
 import math
 import numpy as np
 import pandas as pd
+import scipy.stats as st
+import scipy.special as ss
 
 def calculate(df_population, df_sample):
     count_p = df_population.iloc[0].values
@@ -14,6 +16,7 @@ def calculate(df_population, df_sample):
     means_s = df_sample.iloc[1].values
     std_s = df_sample.iloc[2].values
 
+    # calculate the z value for each iteration (attribute)
     for i in range(1, len(count_p)):
         # means of population and sample
         means1 = means_p[i]
@@ -34,7 +37,17 @@ def calculate(df_population, df_sample):
 
         standard_error = math.sqrt((var1/n1)+(var2/n2))
         z_value = ((means1-means2)-d)/standard_error
-        print("attr%s: %s"%(i,z_value))
+        p_val = st.norm.sf(abs(z_value))*2
+        px = 1 - ss.ndtr(z_value)
+        print("attr%s: %s, probability: %s, %s"%(i,z_value,p_val,px))
+
+        # calculate the degrees of freedom
+        # pembilang = (var1/n1+var2/n2)**2
+        # penyebut1 = ((var1/n1)**2)/(n1-1)
+        # penyebut2 = ((var2/n2)**2)/(n2-1)
+        # penyebut = penyebut1+penyebut2
+        # d_freedom = pembilang/penyebut
+        # print("degrees of freedom",d_freedom)
 
 def main():
     input_file = "output/population_statistics.csv"
@@ -44,6 +57,8 @@ def main():
     df_sample = pd.read_csv(input_file)
 
     calculate(df_population, df_sample)
+    # print("test",st.norm.cdf(1.64))
+    # print(st.norm.sf(abs(1.64))*2)
 
 if __name__ == "__main__":
     main()
