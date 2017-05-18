@@ -39,7 +39,8 @@ def calculate(df_population, df_sample):
         z_value = ((means1-means2)-d)/standard_error
         p_val = st.norm.sf(abs(z_value))*2
         px = 1 - ss.ndtr(z_value)
-        print("attr%s: %s, probability: %s, %s"%(i,z_value,p_val,px))
+        pval = st.t.sf(np.abs(z_value),n2-1)*2
+        print("attr%s: %s, probability: %s, %s, %s"%(i,z_value,p_val,px, p_val))
 
         # calculate the degrees of freedom
         # pembilang = (var1/n1+var2/n2)**2
@@ -57,8 +58,10 @@ def main():
     df_sample = pd.read_csv(input_file)
 
     calculate(df_population, df_sample)
+    
     # print("test",st.norm.cdf(1.64))
     # print(st.norm.sf(abs(1.64))*2)
+    # print("test",st.t.ppf(0.93339648357,999))
 
 if __name__ == "__main__":
     main()
