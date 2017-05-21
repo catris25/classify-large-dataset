@@ -73,7 +73,7 @@ def classify_all(training_dir, testing_dir, k_size, n_size):
 def main():
     # training_dir = "output/training_clustered/3clusters/"
     # testing_dir = "output/testing_clustered/3clusters/"
-    k_size = 3
+    k_size = 1
     n_size = 7
 
     training_dir = "output/training_sampled/2017-05-07 23:12:26/training_set.csv"
