@@ -8,14 +8,24 @@ start_time = time.time()
 # training_sampled_dir = train.sampling(input_file)
 # print("training sampled:", training_sampled_dir)
 
+# # CLUSTERING TRAINING SET
+# print("# CLUSTERING TRAINING SET")
+# import clustering_k_means as clsr
+# # input_file = training_sampled_dir
+# input_file = "output/training_sampled/2017-05-07 23:12:26/training_set.csv"
+# k_size = 3
+# training_clustered_dir = clsr.kmeans(input_file, k_size)
+# print("training clustered:",training_clustered_dir)
+
 # CLUSTERING TRAINING SET
 print("# CLUSTERING TRAINING SET")
-import clustering_k_means as clsr
+import clustering_k_means_sklearn as clsr
 # input_file = training_sampled_dir
 input_file = "output/training_sampled/2017-05-07 23:12:26/training_set.csv"
 k_size = 3
-training_clustered_dir = clsr.kmeans(input_file, k_size)
+training_clustered_dir = clsr.clustering(input_file, k_size)
 print("training clustered:",training_clustered_dir)
+
 
 # SAMPLING TESTING SET
 # print("# SAMPLING TESTING SET")
