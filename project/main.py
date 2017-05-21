@@ -22,7 +22,7 @@ print("# CLUSTERING TRAINING SET")
 import clustering_k_means_sklearn as clsr
 # input_file = training_sampled_dir
 input_file = "output/training_sampled/2017-05-07 23:12:26/training_set.csv"
-k_size = 10
+k_size = 25
 training_clustered_dir = clsr.clustering(input_file, k_size)
 print("training clustered:",training_clustered_dir)
 
@@ -44,29 +44,39 @@ import clustering_testingset as clsrtest
 testing_clustered_dir = clsrtest.cluster_test(training_clustered_file, testing_file)
 print("testing clustered:", testing_clustered_dir)
 
-# CLASSIFICATION NAIVE BAYES
-print("# CLASSIFICATION NAIVE BAYES")
-import classify_nb as nb
-training_dir = training_clustered_dir
-testing_dir = testing_clustered_dir
-tp_nb, all_nb = nb.classify_all(training_dir,testing_dir, k_size)
+# # CLASSIFICATION NAIVE BAYES
+# print("# CLASSIFICATION NAIVE BAYES")
+# import classify_nb as nb
+# training_dir = training_clustered_dir
+# testing_dir = testing_clustered_dir
+# tp_nb, all_nb = nb.classify_all(training_dir,testing_dir, k_size)
+#
+# # CLASSIFICATION K NEAREST NEIGHBOR
+# print("# CLASSIFICATION K NEAREST NEIGHBOR")
+# import classify_knn as knn
+# training_dir = training_clustered_dir
+# testing_dir = testing_clustered_dir
+# n_size = 7
+# tp_knn, all_knn = knn.classify_all(training_dir,testing_dir, k_size, n_size)
 
-# CLASSIFICATION K NEAREST NEIGHBOR
-print("# CLASSIFICATION K NEAREST NEIGHBOR")
-import classify_knn as knn
+# # CLASSIFICATION LOGISTIC regression
+print("# CLASSIFICATION LOGISTIC regression")
+import classify_logistic_regression as lr
 training_dir = training_clustered_dir
 testing_dir = testing_clustered_dir
-n_size = 7
-tp_knn, all_knn = knn.classify_all(training_dir,testing_dir, k_size, n_size)
+tp_lr, all_lr = lr.classify_all(training_dir,testing_dir, k_size)
+
 
 # RESULT
-print("-------------------")
-print("# RESULT")
-print("cluster size =",k_size)
-print("Naive Bayes")
-print(tp_nb,"/",all_nb)
-print("KNN")
-print(tp_knn,"/",all_knn)
+# print("-------------------")
+# print("# RESULT")
+# print("cluster size =",k_size)
+# print("Naive Bayes")
+# print(tp_nb,"/",all_nb)
+# print("KNN")
+# print(tp_knn,"/",all_knn)
+print("LR")
+print(tp_lr,"/",all_lr)
 
 time_elapsed = time.time() - start_time
 print("--- %s seconds ---" % (time_elapsed))
