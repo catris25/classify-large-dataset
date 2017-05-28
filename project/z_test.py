@@ -60,7 +60,7 @@ def main():
     input_file = "output/population_statistics.csv"
     df_population = pd.read_csv(input_file)
 
-    input_file = "output/training_sampled/2017-05-28 22:50:21/training_set.csv"
+    input_file = "output/training_sampled/2017-05-28 22:44:46/training_set.csv"
     df_sample = pd.read_csv(input_file)
 
     print("input file:",input_file)
