@@ -73,8 +73,8 @@ def classify_all(training_dir, testing_dir, k_size):
 
 
 def main():
-    training_dir = "output/training_sampled/2017-05-07 23:12:26/training_set.csv"
-    testing_dir = "output/testing_sampled/2017-05-07 23:12:32/testing-set.csv"
+    training_dir = "output/training_sampled/2017-05-28 22:44:46/training_set.csv"
+    testing_dir = "output/testing_sampled/2017-05-28 22:54:04/testing-set.csv"
     k_size = 1
 
     df_training = pd.read_csv(training_dir)

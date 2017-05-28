@@ -21,7 +21,7 @@ start_time = time.time()
 print("# CLUSTERING TRAINING SET")
 import clustering_k_means_sklearn as clsr
 # input_file = training_sampled_dir
-input_file = "output/training_sampled/2017-05-07 23:12:26/training_set.csv"
+input_file = "output/training_sampled/2017-05-28 22:44:46/training_set.csv"
 k_size = 25
 training_clustered_dir = clsr.clustering(input_file, k_size)
 print("training clustered:",training_clustered_dir)
@@ -38,7 +38,7 @@ print("training clustered:",training_clustered_dir)
 # CLUSTERING TESTING SET
 print("# CLUSTERING TESTING SET")
 # testing_file = testing_sampled_dir
-testing_file = "output/testing_sampled/2017-05-07 23:12:32/testing-set.csv"
+testing_file = "output/testing_sampled/2017-05-28 22:54:04/testing-set.csv"
 training_clustered_file = training_clustered_dir
 import clustering_testingset as clsrtest
 testing_clustered_dir = clsrtest.cluster_test(training_clustered_file, testing_file)
