@@ -9,6 +9,7 @@ from sklearn.metrics import accuracy_score
 
 import itertools
 import pandas as pd
+import numpy as np
 
 def naive_bayes(training_attr,training_target, testing_attr, testing_target):
 
@@ -42,13 +43,25 @@ def brute_force(df):
 
     testing_target = testing_set.ix[:,7]
 
+    
+
     # for i in range(1,7):
     #     print(list(itertools.combinations('1234567',i)))
 
     attrs = [0,1,2,3,4,5,6]
+    # attrs = ['attr1', 'attr2', 'attr3', 'attr4', 'attr5', 'attr6', 'attr7']
+    j =1
     for i in range(1,len(attrs)+1):
         for c in itertools.combinations(attrs,i):
-            print(c)
+            temp = np.array(c)
+            print(j,"",c)
+            print(temp[0])
+            training_attr = training_attr.ix[:,temp[0]]
+            print(training_attr.head())
+
+            j+=1
+            # training_attr = training_attr.ix[:,[c]]
+            # print(training_attr.head())
             # training_attr = training_attr.ix[:,[subset]]
             # testing_attr = testing_attr.ix[:,[subset]]
             # result = naive_bayes(training_attr,training_target, testing_attr, testing_target)
