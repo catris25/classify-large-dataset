@@ -7,6 +7,7 @@ from sklearn import metrics
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import accuracy_score
 
+import itertools
 import pandas as pd
 
 def naive_bayes(training_attr,training_target, testing_attr, testing_target):
@@ -41,19 +42,44 @@ def brute_force(df):
 
     testing_target = testing_set.ix[:,7]
 
-    for i in range(1):
+    # for i in range(1,7):
+    #     print(list(itertools.combinations('1234567',i)))
 
-        # df_attr = df.ix[i]
-        training_attr = training_attr.ix[:,[1,2,4,5]]
-        testing_attr = testing_attr.ix[:,[1,2,4,5]]
-        # print(testing_attr.head())
-        # return
-        # testing_attr = testing_attr.ix[i]
-        result = naive_bayes(training_attr,training_target, testing_attr, testing_target)
+    attrs = [0,1,2,3,4,5,6]
+    for i in range(1,len(attrs)+1):
+        for c in itertools.combinations(attrs,i):
+            print(c)
+            # training_attr = training_attr.ix[:,[subset]]
+            # testing_attr = testing_attr.ix[:,[subset]]
+            # result = naive_bayes(training_attr,training_target, testing_attr, testing_target)
+            # print(result)
 
-        print("attr-%s"%i)
-        print(result)
-        print("----------------")
+
+
+        # training_attr = training_attr.ix[:,[i]].as_matrix()
+        # testing_attr = testing_attr.ix[:,[i]].as_matrix()
+
+
+        # result = naive_bayes(training_attr,training_target, testing_attr, testing_target)
+        # print(result)
+
+
+    # for i in range(7):
+    #
+    #     # df_attr = df.ix[i]
+    #     training_attr = training_attr.ix[:,[i]]
+    #
+    #     testing_attr = testing_attr.ix[:,[i]]
+    #     # print(testing_attr.head(10))
+    #     # return
+    #     # print(testing_attr.head())
+    #     # return
+    #     # testing_attr = testing_attr.ix[i]
+    #     result = naive_bayes(training_attr,training_target, testing_attr, testing_target)
+    #
+    #     print("attr-%s"%i)
+    #     print(result)
+    #     print("----------------")
 
 
 
