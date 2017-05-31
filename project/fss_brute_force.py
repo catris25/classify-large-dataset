@@ -34,16 +34,16 @@ def brute_force(df):
 
     # print(df_attr['attr3'].head())
     training_set = df.sample(frac=0.66, random_state=1)
-    training_attr = training_set.ix[:,[0,1,2,3,4,5,6]]
+    temp_training_attr = training_set.ix[:,[0,1,2,3,4,5,6]]
     training_target = training_set.ix[:,7]
 
     testing_set = df.loc[~df.index.isin(training_set.index)]
-    testing_attr = testing_set.ix[:,[0,1,2,3,4,5,6]]
+    temp_testing_attr = testing_set.ix[:,[0,1,2,3,4,5,6]]
 
 
     testing_target = testing_set.ix[:,7]
 
-    
+
 
     # for i in range(1,7):
     #     print(list(itertools.combinations('1234567',i)))
@@ -53,19 +53,20 @@ def brute_force(df):
     j =1
     for i in range(1,len(attrs)+1):
         for c in itertools.combinations(attrs,i):
-            temp = np.array(c)
-            print(j,"",c)
-            print(temp[0])
-            training_attr = training_attr.ix[:,temp[0]]
-            print(training_attr.head())
+            # print(j,"",c)
 
+            training_attr = temp_training_attr.ix[:,c]
+            testing_attr = temp_testing_attr.ix[:,c]
+            # print(training_attr.head())
             j+=1
+
+
             # training_attr = training_attr.ix[:,[c]]
             # print(training_attr.head())
             # training_attr = training_attr.ix[:,[subset]]
             # testing_attr = testing_attr.ix[:,[subset]]
-            # result = naive_bayes(training_attr,training_target, testing_attr, testing_target)
-            # print(result)
+            result = naive_bayes(training_attr,training_target, testing_attr, testing_target)
+            print(result)
 
 
 
