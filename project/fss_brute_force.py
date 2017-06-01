@@ -34,74 +34,46 @@ def brute_force(df):
 
     # print(df_attr['attr3'].head())
     training_set = df.sample(frac=0.66, random_state=1)
-    temp_training_attr = training_set.ix[:,[0,1,2,3,4,5,6]]
-    training_target = training_set.ix[:,7]
+    temp_training_attr = training_set.ix[:,[0,1,2,3,4,5,6,7,8]]
+    training_target = training_set.ix[:,9]
 
     testing_set = df.loc[~df.index.isin(training_set.index)]
-    temp_testing_attr = testing_set.ix[:,[0,1,2,3,4,5,6]]
+    temp_testing_attr = testing_set.ix[:,[0,1,2,3,4,5,6,7,8]]
 
 
-    testing_target = testing_set.ix[:,7]
+    testing_target = testing_set.ix[:,9]
 
 
 
     # for i in range(1,7):
     #     print(list(itertools.combinations('1234567',i)))
 
-    attrs = [0,1,2,3,4,5,6]
+    attrs = [0,1,2,3,4,5,6,7,8]
     # attrs = ['attr1', 'attr2', 'attr3', 'attr4', 'attr5', 'attr6', 'attr7']
     j =1
+
+    accu = []
     for i in range(1,len(attrs)+1):
         for c in itertools.combinations(attrs,i):
-            # print(j,"",c)
+            print(j,"",c)
 
             training_attr = temp_training_attr.ix[:,c]
             testing_attr = temp_testing_attr.ix[:,c]
             # print(training_attr.head())
             j+=1
 
-
-            # training_attr = training_attr.ix[:,[c]]
-            # print(training_attr.head())
-            # training_attr = training_attr.ix[:,[subset]]
-            # testing_attr = testing_attr.ix[:,[subset]]
             result = naive_bayes(training_attr,training_target, testing_attr, testing_target)
             print(result)
 
+            accu.append(result)
 
-
-        # training_attr = training_attr.ix[:,[i]].as_matrix()
-        # testing_attr = testing_attr.ix[:,[i]].as_matrix()
-
-
-        # result = naive_bayes(training_attr,training_target, testing_attr, testing_target)
-        # print(result)
-
-
-    # for i in range(7):
-    #
-    #     # df_attr = df.ix[i]
-    #     training_attr = training_attr.ix[:,[i]]
-    #
-    #     testing_attr = testing_attr.ix[:,[i]]
-    #     # print(testing_attr.head(10))
-    #     # return
-    #     # print(testing_attr.head())
-    #     # return
-    #     # testing_attr = testing_attr.ix[i]
-    #     result = naive_bayes(training_attr,training_target, testing_attr, testing_target)
-    #
-    #     print("attr-%s"%i)
-    #     print(result)
-    #     print("----------------")
-
-
-
+    print("maximum ",max(accu))
 
 def main():
 
 
-    input_file="output/training_sampled/2017-05-07 23:12:26/training_set.csv"
+    # input_file="output/training_sampled/2017-05-07 23:12:26/training_set.csv"
+    input_file = "/home/lia/Documents/work-it-out/weka data/training_set_ndvi.csv"
 
     df = pd.read_csv(input_file)
     brute_force(df)
