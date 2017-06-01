@@ -90,7 +90,7 @@ def kmeans(input_file, k_size):
     df["cluster"] = labels
 
     for name in clusterNames:
-        print("name:", name)
+        print("cluster:", name)
         temp = df.loc[df['cluster']==name]
         temp.to_csv("output/training_clustered/%s/%s.csv"%(dir_name,name), index=False)
         classCount = temp['class'].value_counts(sort=False)
@@ -102,8 +102,8 @@ def kmeans(input_file, k_size):
     return training_clustered_dir
 
 def main():
-    k_size = 3
-    input_file="output/training_sampled/2017-05-07 00:27:19/training_set.csv"
+    k_size = 5
+    input_file="output/training_sampled/2017-05-28 22:44:46/training_set.csv"
     print(kmeans(input_file, k_size))
 
 
