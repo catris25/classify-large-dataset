@@ -16,9 +16,10 @@ import time
 def clustering(input_file, k_size):
     df = pd.read_csv(input_file)
     # x = df.ix[:,[0,1,2,3,4,5,6]]
-    x = df.ix[:,[0,4,5,6]]
-    y = df.ix[:,7]
+    x = df.ix[:,[0,1,2,3]]
+    y = df.ix[:,4]
 
+    print(x.head())
     k=k_size
 
     model = KMeans(n_clusters=k)
@@ -43,6 +44,8 @@ def clustering(input_file, k_size):
     df_centroids = pd.DataFrame(centroids,columns=['attr1', 'attr5', 'attr6', 'attr7'])
     df_centroids.to_csv("output/training_clustered/%s/centroids.csv"%dir_name, index=False)
 
+    print(df_centroids.head())
+
     for name in clusterNames:
         temp = x.loc[x['cluster']==name]
         temp.to_csv("output/training_clustered/%s/%s.csv"%(dir_name,name), index=False)
@@ -63,7 +66,7 @@ def clustering(input_file, k_size):
 def main():
     k_size = 5
 
-    input_file="output/training_sampled/2017-05-28 22:44:46/training_set.csv"
+    input_file="output/training_sampled/2017-05-28 22:44:46/training_set_selected.csv"
 
     print(clustering(input_file, k_size))
 
