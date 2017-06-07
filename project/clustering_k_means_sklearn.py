@@ -16,8 +16,8 @@ import time
 def clustering(input_file, k_size):
     df = pd.read_csv(input_file)
     # x = df.ix[:,[0,1,2,3,4,5,6]]
-    x = df.ix[:,[0,1,2,3]]
-    y = df.ix[:,4]
+    x = df.ix[:,[0,1,2,3,4,5,6]]
+    y = df.ix[:,7]
 
     print(x.head())
     k=k_size
@@ -40,8 +40,8 @@ def clustering(input_file, k_size):
     os.makedirs("output/training_clustered/%s"%dir_name, exist_ok=True)
 
     # store the centroids
-    # df_centroids = pd.DataFrame(centroids,columns=['attr1', 'attr2', 'attr3', 'attr4', 'attr5', 'attr6', 'attr7'])
-    df_centroids = pd.DataFrame(centroids,columns=['attr1', 'attr5', 'attr6', 'attr7'])
+    df_centroids = pd.DataFrame(centroids,columns=['attr1', 'attr2', 'attr3', 'attr4', 'attr5', 'attr6', 'attr7'])
+    # df_centroids = pd.DataFrame(centroids,columns=['attr1', 'attr2', 'attr3', 'attr4' 'attr5', 'attr6', 'attr7'])
     df_centroids.to_csv("output/training_clustered/%s/centroids.csv"%dir_name, index=False)
 
     print(df_centroids.head())
@@ -66,7 +66,7 @@ def clustering(input_file, k_size):
 def main():
     k_size = 5
 
-    input_file="output/training_sampled/2017-05-28 22:44:46/training_set_selected.csv"
+    input_file="output/training_sampled/2017-06-07 23:26:53/training_set.csv"
 
     print(clustering(input_file, k_size))
 

@@ -51,8 +51,8 @@ def cluster_test(training_file, testing_file):
     return testing_clustered_dir
 
 def main():
-    training_file = "output/training_clustered/3clusters/centroids.csv"
-    testing_file = "output/testing_sampled/2017-05-07 01:26:29/testing-set.csv"
+    training_file = "output/training_clustered/5clusters 2017-06-07 23:39:07"
+    testing_file = "output/testing_sampled/2017-06-07 23:49:25/testing-set.csv"
 
     clsr = cluster_test(training_file,testing_file)
     print("result:",clsr)

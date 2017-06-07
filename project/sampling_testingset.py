@@ -46,7 +46,7 @@ def sampling(input_file, n_size):
 
 def main():
     input_file="/home/lia/Documents/FINAL-GEMASTIK/training.csv"
-    n_size = 10000
+    n_size = 50000
     sampl = sampling(input_file, n_size)
     print("result:",sampl)
 

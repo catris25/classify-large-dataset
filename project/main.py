@@ -21,8 +21,8 @@ start_time = time.time()
 print("# CLUSTERING TRAINING SET")
 import clustering_k_means_sklearn as clsr
 # input_file = training_sampled_dir
-input_file = "output/training_sampled/2017-05-28 22:44:46/training_set.csv"
-k_size = 25
+input_file = "output/training_sampled/2017-06-07 23:30:04/training_set.csv"
+k_size = 5
 training_clustered_dir = clsr.clustering(input_file, k_size)
 print("training clustered:",training_clustered_dir)
 
@@ -60,11 +60,11 @@ print("testing clustered:", testing_clustered_dir)
 # tp_knn, all_knn = knn.classify_all(training_dir,testing_dir, k_size, n_size)
 
 # # CLASSIFICATION LOGISTIC regression
-print("# CLASSIFICATION LOGISTIC regression")
-import classify_logistic_regression as lr
-training_dir = training_clustered_dir
-testing_dir = testing_clustered_dir
-tp_lr, all_lr = lr.classify_all(training_dir,testing_dir, k_size)
+# print("# CLASSIFICATION LOGISTIC regression")
+# import classify_logistic_regression as lr
+# training_dir = training_clustered_dir
+# testing_dir = testing_clustered_dir
+# tp_lr, all_lr = lr.classify_all(training_dir,testing_dir, k_size)
 
 
 # RESULT
@@ -75,8 +75,8 @@ tp_lr, all_lr = lr.classify_all(training_dir,testing_dir, k_size)
 # print(tp_nb,"/",all_nb)
 # print("KNN")
 # print(tp_knn,"/",all_knn)
-print("LR")
-print(tp_lr,"/",all_lr)
+# print("LR")
+# print(tp_lr,"/",all_lr)
 
 time_elapsed = time.time() - start_time
 print("--- %s seconds ---" % (time_elapsed))
