@@ -72,9 +72,11 @@ def classify_all(training_dir, testing_dir, k_size):
     return all_true_pos, all_sum_matrix
 
 def main():
-    training_dir = "output/over_sampling/test-1/5clusters-balanced"
-    testing_dir = "output/testing_clustered/5clusters/"
-    k_size = 5
+    # training_dir = "output/over_sampling/test-1/5clusters-balanced"
+    training_dir = "output/training_clustered/6clusters"
+    testing_dir = "output/testing_clustered/6clusters"
+    # testing_dir = "output/testing_clustered/5clusters/"
+    k_size = 6
 
     clsr = classify_all(training_dir,testing_dir, k_size)
     #
